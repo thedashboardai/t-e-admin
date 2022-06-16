@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  width: 40vw;
+  margin: 0 auto;
+}
+
+.toggle {
+  display: flex;
+  gap: 1em;
+  /* width: fit-content; */
+  margin: auto;
+  background-color: beige;
+  padding: 2em;
+  float: right;
+}
+
+.bg-white {
+  background-color: white;
+}
