@@ -124,6 +124,8 @@ const AddRestaurant = ({API}) => {
   }, [API])
 
   const addRestaurant = async () => {
+    if(!value) return
+
     const res = await fetch(`${API}/api/v1/addRestaurant`, {
       method: 'POST',
       headers: {
@@ -207,6 +209,7 @@ const AddTopic = ({API}) => {
   }, [chain])
 
   const addAllTopicsByRestaurantId = async () => {
+    if(!topicName) return
     const res = await fetch(`${API}/api/v1/addAllTopicsByRestaurantId/${restaurant}`, {
       method: 'POST',
       headers: {
@@ -334,9 +337,9 @@ const AddContent = ({API}) => {
   const uploadFile = async () => {
 
     let imageData = new FormData();
-    imageData.append('image', files[0]);
+    imageData.append('file', files[0]);
 
-    const res = await fetch(`${API}/api/v1/uploadFile?title=${title}&description=${desc}&file=${fileType}&chapter_number=${chapter}&topic_id=${topicName}&restaurant_id=${restaurant}`, {
+    const res = await fetch(`${API}/api/v1/uploadFile?title=${title}&description=${desc}&chapter_number=${chapter}&topic_id=${topicName}&restaurant_id=${restaurant}`, {
       method: 'POST',
       body: imageData
     })
@@ -344,8 +347,8 @@ const AddContent = ({API}) => {
     console.log('@@ upload', data);
 
     if(data?.isActive) {
-      alert('Chain Added')
-    } else if(data.status == 400) {
+      alert('File Added')
+    } else if(data.status == 400 || data.status == 500) {
       alert(data.message)
     }
   }
@@ -411,19 +414,19 @@ const AddContent = ({API}) => {
         value={chapter}
       />
 
-      <SelectField className='bg-white' value={fileType} onChange={event => setfileType(event.target.value)} label="Select File Type" required>
+      {/* <SelectField className='bg-white' value={fileType} onChange={event => setfileType(event.target.value)} label="Select File Type" required>
         {fileTypes?.map((r, idx) => (
         <option value={r?.value} selected={idx===0 ? true : false}>
           {r?.label}
         </option>
         ))}
-      </SelectField>
+      </SelectField> */}
 
       <Pane maxWidth={654}>
       <FileUploader
         label="Upload File"
-        description="You can upload 1 file. File can be up to 50 GB."
-        maxSizeInBytes={50 * 1024 * 1024 ** 2}
+        description="You can upload 1 file. File can be up to 100 MB. Only JPG or MP4"
+        maxSizeInBytes={100 * 1024 ** 2}
         maxFiles={1}
         onChange={handleChange}
         onRejected={handleRejected}
