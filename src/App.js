@@ -353,6 +353,8 @@ const AddContent = ({API}) => {
       alert('File Added')
     } else if(data.status == 400 || data.status == 500) {
       alert(data.message)
+    } else {
+      alert('File Added')
     }
   }
 
