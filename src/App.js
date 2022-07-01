@@ -198,7 +198,10 @@ const AddTopic = ({API}) => {
     const res = await fetch(`${API}/api/v1/getAllRestaurantsByChain/${chain}`)
     const data = await res?.json()
     console.log('@@ restaurants', data, '&&', data.map(r => { return { label: r?.name, value: r?.restaurantId } }));
-    setRestaurants(data.map(r => { return { label: r?.name, value: r?.restaurantId } }))
+    // setRestaurants(data.map(r => { return { label: r?.name, value: r?.restaurantId } }))
+    const allRestaurants = data.map(r => { return { label: r?.name, value: r?.restaurantId } })
+    setRestaurants(allRestaurants)
+    setrestaurant(allRestaurants[0].value)
   }
 
   React.useEffect(() => {
