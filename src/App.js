@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useEffect } from 'react';
-import { Button, FileCard, FileUploader, Pane, Paragraph, Select, SelectField, Switch, Tab, Tablist, Textarea, TextInputField } from 'evergreen-ui';
+import { Alert, Button, FileCard, FileUploader, Pane, Paragraph, Select, SelectField, Switch, Tab, Tablist, Textarea, TextInputField } from 'evergreen-ui';
 
 function App() {
   const [selectedIndex, setSelectedIndex] = React.useState(0)
@@ -100,6 +100,11 @@ const AddChain = ({API}) => {
       <Button onClick={createNewChain} marginRight={16} appearance="primary" intent="success">
         Add
       </Button>
+      <Alert
+        intent="none"
+        title="Note: Refresh the browser after adding a new chain. Then ensure to change the mode (Dev/Prod)"
+        marginBottom={32}
+      />
     </div>
   )
 }
